@@ -1,14 +1,15 @@
 import "@radix-ui/themes/styles.css";
 import "./theme-config.css";
 import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import NavBar from "./NavBar";
 
-import { Container, Theme, ThemePanel } from "@radix-ui/themes";
+import { Container, Theme } from "@radix-ui/themes";
 
-import AuthProvider from "./auth/Provider";
-import QueryClientProvider from "./QueryClientProvider";
+import AuthProvider from "./providers/AuthProvider";
+import QueryClientProvider from "./providers/QueryClientProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default function RootLayout({
         <QueryClientProvider>
           <AuthProvider>
             <Theme accentColor="violet">
-              <NavBar></NavBar>
+              <NavBar />
               <main className="p-5">
                 <Container>{children}</Container>
               </main>
