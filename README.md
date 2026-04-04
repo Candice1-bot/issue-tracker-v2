@@ -131,16 +131,6 @@ npm run dev
 
 Then open `http://localhost:3000`.
 
-## Why this project is useful
-
-This repo demonstrates:
-
-- building a real CRUD workflow with the App Router
-- structuring a full-stack Next.js application
-- integrating authentication and database persistence
-- combining dashboard UX with operational issue-management features
-- adding observability tooling to a practical web application
-
 ## Possible Improvements
 
 - Add role-based access control for admins and standard users
