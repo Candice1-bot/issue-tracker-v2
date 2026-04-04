@@ -7,12 +7,12 @@
 generator client {
   provider = "prisma-client-js"
   output   = "../app/generated/prisma"
-  url      = env("DATABASE_URL")
 }
 
 datasource db {
   provider     = "mysql"
   relationMode = "prisma"
+  url          = env("DATABASE_URL")
 }
 
 model Issue {
