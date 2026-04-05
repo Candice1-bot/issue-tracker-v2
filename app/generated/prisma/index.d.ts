@@ -7754,7 +7754,7 @@ export namespace Prisma {
     identifier?: StringFilter<"VerificationToken"> | string
     token?: StringFilter<"VerificationToken"> | string
     expires?: DateTimeFilter<"VerificationToken"> | Date | string
-  }, "identifier_token">
+  }, "identifier_token" | "identifier_token">
 
   export type VerificationTokenOrderByWithAggregationInput = {
     identifier?: SortOrder
