@@ -1,8 +1,7 @@
 declare class AnyNull extends NullTypesEnumValue {
-    #private;
 }
 
-declare type Args<T, F extends Operation> = T extends {
+export declare type Args<T, F extends Operation> = T extends {
     [K: symbol]: {
         types: {
             operations: {
@@ -12,13 +11,10 @@ declare type Args<T, F extends Operation> = T extends {
             };
         };
     };
-} ? T[symbol]['types']['operations'][F]['args'] : any;
+} ? T[symbol]['types']['operations'][F]['args'] : never;
 
 declare class DbNull extends NullTypesEnumValue {
-    #private;
 }
-
-export declare function Decimal(n: Decimal.Value): Decimal;
 
 export declare namespace Decimal {
     export type Constructor = typeof Decimal;
@@ -287,20 +283,32 @@ export declare class Decimal {
     static readonly EUCLID: 9;
 }
 
-declare type Exact<A, W> = (A extends unknown ? (W extends A ? {
-    [K in keyof A]: Exact<A[K], W[K]>;
+/**
+ * Detect the current JavaScript runtime following
+ * the WinterCG Runtime Keys proposal:
+ *
+ * - `edge-routine` Alibaba Cloud Edge Routine
+ * - `workerd` Cloudflare Workers
+ * - `deno` Deno and Deno Deploy
+ * - `lagon` Lagon
+ * - `react-native` React Native
+ * - `netlify` Netlify Edge Functions
+ * - `electron` Electron
+ * - `node` Node.js
+ * - `bun` Bun
+ * - `edge-light` Vercel Edge Functions
+ * - `fastly` Fastly Compute@Edge
+ *
+ * @see https://runtime-keys.proposal.wintercg.org/
+ * @returns {Runtime}
+ */
+export declare function detectRuntime(): Runtime;
+
+export declare type Exact<A, W> = (A extends unknown ? (W extends A ? {
+    [K in keyof W]: K extends keyof A ? Exact<A[K], W[K]> : never;
 } : W) : never) | (A extends Narrowable ? A : never);
 
-export declare function getRuntime(): GetRuntimeOutput;
-
-declare type GetRuntimeOutput = {
-    id: RuntimeName;
-    prettyName: string;
-    isEdge: boolean;
-};
-
 declare class JsonNull extends NullTypesEnumValue {
-    #private;
 }
 
 /**
@@ -321,7 +329,7 @@ declare class JsonNull extends NullTypesEnumValue {
  */
 export declare function makeStrictEnum<T extends Record<PropertyKey, string | number>>(definition: T): T;
 
-declare type Narrowable = string | number | bigint | boolean | [];
+export declare type Narrowable = string | number | bigint | boolean | [];
 
 declare class NullTypesEnumValue extends ObjectEnumValue {
     _getNamespace(): string;
@@ -350,7 +358,7 @@ export declare const objectEnumValues: {
     };
 };
 
-declare type Operation = 'findFirst' | 'findFirstOrThrow' | 'findUnique' | 'findUniqueOrThrow' | 'findMany' | 'create' | 'createMany' | 'createManyAndReturn' | 'update' | 'updateMany' | 'updateManyAndReturn' | 'upsert' | 'delete' | 'deleteMany' | 'aggregate' | 'count' | 'groupBy' | '$queryRaw' | '$executeRaw' | '$queryRawUnsafe' | '$executeRawUnsafe' | 'findRaw' | 'aggregateRaw' | '$runCommandRaw';
+export declare type Operation = 'findFirst' | 'findFirstOrThrow' | 'findUnique' | 'findUniqueOrThrow' | 'findMany' | 'create' | 'createMany' | 'update' | 'updateMany' | 'upsert' | 'delete' | 'deleteMany' | 'aggregate' | 'count' | 'groupBy' | '$queryRaw' | '$executeRaw' | '$queryRawUnsafe' | '$executeRawUnsafe' | 'findRaw' | 'aggregateRaw' | '$runCommandRaw';
 
 declare namespace Public {
     export {
@@ -359,7 +367,7 @@ declare namespace Public {
 }
 export { Public }
 
-declare type RuntimeName = 'workerd' | 'deno' | 'netlify' | 'node' | 'bun' | 'edge-light' | '';
+export declare type Runtime = "edge-routine" | "workerd" | "deno" | "lagon" | "react-native" | "netlify" | "electron" | "node" | "bun" | "edge-light" | "fastly" | "unknown";
 
 declare function validator<V>(): <S>(select: Exact<S, V>) => S;
 
