@@ -51,6 +51,7 @@ export async function PATCH(request: NextRequest, { params }: Props) {
         data: {status: status}
     })
     revalidatePath('/issues');
+    revalidatePath('/issues/myIssue');
     revalidatePath(`/issues/${issueId}`);
     return NextResponse.json({})
   }catch(error){

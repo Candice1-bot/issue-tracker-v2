@@ -45,29 +45,28 @@ const MyIssuePage = async () => {
 
   return (
     <div>
-      <h1>Hello, {userEmail}</h1>
+      <h1 className="font-bold">Hello, {userEmail}</h1>
       <h2>Your Assigned Issues:</h2>
 
       {assignedIssues.length === 0 ? (
         <p>You have no issues assigned to you.</p>
       ) : (
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-3">
           {assignedIssues.map((issue) => (
-            <Card key={issue.id}>
+            <Card key={issue.id} className="bg-blue-400">
               <li key={issue.id}>
-                <h3>{issue.title}</h3>
-                <IssueStatusBadge status={issue.status} />
-                <p>{issue.description}</p>
-                <Flex>
-                  <div>
-                    <small>
-                      Created: {new Date(issue.createdAt).toLocaleString()}
-                    </small>
-                    <br />
-                    <small>
-                      Last Updated: {new Date(issue.updatedAt).toLocaleString()}
-                    </small>
-                  </div>
+                <h3 className="text-blue-500">{issue.title}</h3>
+                <IssueStatusBadge issueId={issue.id} status={issue.status} />
+
+                <p className="mb-3">{issue.description}</p>
+                <Flex gap="3" justify="center" align="end" direction="row">
+                  <small>
+                    Created: {new Date(issue.createdAt).toLocaleString()}
+                  </small>
+                  <br />
+                  <small>
+                    Last Updated: {new Date(issue.updatedAt).toLocaleString()}
+                  </small>
                 </Flex>
               </li>
             </Card>

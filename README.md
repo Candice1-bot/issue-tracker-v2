@@ -1,25 +1,58 @@
 # Overview
 
-A full-stack issue tracking application built with Next.js, React 19, TypeScript, Prisma, and MySQL. it extended and updated Mosh Hamedani’s original tutorial.
+This is a full-stack issue tracking application built with Next.js, React 19, TypeScript, Prisma, and MySQL.
+It extended and updated Mosh Hamedani’s original tutorial.
 
-## Key Difference with Mosh's 2023 Course
+## Key Difference
+
+- Add registration page and credentials provider, users can register and log in.
+
+## Project Structure
+
+```text
+app/
+├── api/                  # API routes for auth, issues, and users
+├── auth/                 # NextAuth configuration and provider wrapper
+├── components/           # Reusable UI components
+├── issues/               # Issue list, detail, create, and edit routes
+├── lib/                  # Shared helpers such as Prisma client
+├── providers/            # providers wrapping
+├── signup/               # signup page
+├── IssueChart.tsx        # Dashboard chart
+├── IssueSummary.tsx      # Summary cards
+├── LatestIssues.tsx      # Recent issue widget
+└── page.tsx              # entry page
+
+prisma/
+└── schema.prisma         # Issue, user, session, and auth models
+```
+
+## web page structure
+
+need no authentication:
+/ ----- entry page
+/issues/:id ----- check a certain issue detail
+
+need authentication:
+/issues/myIssue ----- after logging in, check my issues
+/issues/list ----- after logging in, listing all issues
+/issues/:id ----- check a certain issue detail
+/issues/new ----- new a issue
+/api/auth/signin ---- signin with credentials or signin with google
+
+## how to log in?
+
+sample users: alice@example.com, bob@example.com, maya@example.com
+sample login password: Password123!
+
+## minor updating:
 
 - Params and searchParams in Props are Promise type now
 - PlantScale no longer offers free Hobby tier, use Aiven as production database
-- get rid of
-- Add registration page and credentials provider, users can register and log in to enable edit function
+
 - Add status selector on issue detail page to update status
 - In custom Link component, legacyBehavior will be deprecated. To ensure future consistency, use RadixLink to wrap NextLink
 - In AssigneeSelector component, Select component no longer accepts an empty string as value, use 'unassigned' to represent unassigned status
-
-## Tech Stack
-
-- Frontend: Next.js 15 (App Router), React 19, Radix UI, Tailwind CSS
-- Backend: Prisma ORM (MySQL), REST API routes
-- State Management: TanStack Query
-- Auth: NextAuth v4 with Google OAuth
-- Deployment: Vercel, Aiven MySQL
-- Dev Tools: TypeScript, ESLint, Prettier, Sentry
 
 ## Features
 
@@ -34,7 +67,10 @@ A full-stack issue tracking application built with Next.js, React 19, TypeScript
 - Dynamic rendering with server and client components
 - Role-based route protection and session handling
 
-Data Fetching & Caching
+- Data Fetching & Caching
+
+## Tech Stack
+
 **Frontend**
 
 - Next.js 15
@@ -55,31 +91,6 @@ Data Fetching & Caching
 - Axios
 - React Query
 
-**Tooling**
-
-- ESLint
-- PostCSS
-- TSX
-- Sentry for Next.js
-
-## Project Structure
-
-```text
-app/
-├── api/                  # API routes for auth, issues, and users
-├── auth/                 # NextAuth configuration and provider wrapper
-├── components/           # Reusable UI components
-├── issues/               # Issue list, detail, create, and edit routes
-├── lib/                  # Shared helpers such as Prisma client
-├── IssueChart.tsx        # Dashboard chart
-├── IssueSummary.tsx      # Summary cards
-├── LatestIssues.tsx      # Recent issue widget
-└── page.tsx              # Dashboard/home page
-
-prisma/
-└── schema.prisma         # Issue, user, session, and auth models
-```
-
 ## Data Model
 
 The Prisma schema includes:
@@ -90,40 +101,31 @@ The Prisma schema includes:
 
 ## Getting Started
 
-### 1. Clone the repository
+#### 1. Clone the repository
 
 ```bash
 git clone <repo-url>
 cd issue-tracker
 ```
 
-### 2. Install dependencies
+#### 2. Install dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Configure environment variables
+#### 3. Configure environment variables
 
 Create a `.env` file based on `.env.example`:
 
-```env
-DATABASE_URL=""
-NEXTAUTH_URL="http://localhost:3001"
-NEXTAUTH_SECRET=""
-GOOGLE_CLIENT_ID=""
-GOOGLE_CLIENT_SECRET=""
-PORT=3001
-```
-
-### 4. Run database migrations / generate Prisma client
+#### 4. Run database migrations / generate Prisma client
 
 ```bash
 npx prisma generate
 npx prisma migrate dev
 ```
 
-### 5. Start the development server
+#### 5. Start the development server
 
 ```bash
 npm run dev
@@ -133,10 +135,7 @@ Then open `http://localhost:3000`.
 
 ## Possible Improvements
 
-- Add role-based access control for admins and standard users
-- Improve issue assignment workflows with notifications
 - Add test coverage for API routes and critical UI flows
-- Support richer analytics and reporting on issue trends
 
 ## License
 

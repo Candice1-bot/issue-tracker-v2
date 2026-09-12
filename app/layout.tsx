@@ -10,6 +10,7 @@ import { Container, Theme } from "@radix-ui/themes";
 
 import AuthProvider from "./providers/AuthProvider";
 import QueryClientProvider from "./providers/QueryClientProvider";
+import ToastProvider from "./providers/ToastProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
               <main className="p-5">
                 <Container>{children}</Container>
               </main>
+              <ToastProvider />
             </Theme>
           </AuthProvider>
         </QueryClientProvider>

@@ -5,11 +5,11 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
-
 const authOptions: NextAuthOptions = {
-    adapter: PrismaAdapter(prisma),
-    providers: [
-      CredentialsProvider({
+  adapter: PrismaAdapter(prisma),
+  providers: [
+    // log in by credentials
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email", placeholder: "email" },
@@ -28,21 +28,21 @@ const authOptions: NextAuthOptions = {
 
         const passwordsMatch = await bcrypt.compare(
           credentials.password,
-          user.hashedPassword!
+          user.hashedPassword!,
         );
         return passwordsMatch ? user : null;
       },
     }),
 
-      GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID!,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      }),
-    ],
-    session: { 
-      strategy: "jwt", 
-    },
-}
-
+    // log in through other provider
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+    }),
+  ],
+  session: {
+    strategy: "jwt",
+  },
+};
 
 export default authOptions;

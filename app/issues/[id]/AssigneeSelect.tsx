@@ -8,7 +8,7 @@ import React, { useEffect, useId, useState } from "react";
 import { Skeleton } from "@/app/components";
 import { Issue, User } from "@/app/generated/prisma";
 
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const { data: users, error, isLoading } = useUsers();
@@ -48,8 +48,6 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
           </Select.Group>
         </Select.Content>
       </Select.Root>
-
-      <Toaster />
     </>
   );
 };

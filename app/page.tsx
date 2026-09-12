@@ -29,4 +29,11 @@ export default async function Home() {
 export const metadata: Metadata = {
   title: "Issue Tracker - Dashboard",
   description: "View a summary of project issues",
+  openGraph: {
+    title: "Issue Tracker",
+    description: "An example app to deal with issues.",
+    url: "https://issue-tracker-g1bo.vercel.app",
+    images: [{ url: "https://issue-tracker-g1bo.vercel.app/home-page.png" }],
+    type: "website",
+  },
 };
